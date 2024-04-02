@@ -5,11 +5,21 @@ import './css/dark.css'
 import Header from './parts/Header';
 import { DarkMode } from '../context/DarkMode';
 import { useTranslation } from "react-i18next"
+import { User } from '../context/User';
 
 
 function NoPage() {
+  const {language, setLanguage} = useContext(User)
   const {dark, setDark} = useContext(DarkMode)
   const { t , i18n } = useTranslation("global")
+
+  useEffect(()=>{
+    const lang = localStorage.getItem("language")
+    if(lang){
+      setLanguage(JSON.parse(lang))
+      i18n.changeLanguage(JSON.parse(lang))
+    }
+  },[language])
 
   
   useEffect(()=>{

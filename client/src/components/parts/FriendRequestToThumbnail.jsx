@@ -64,8 +64,8 @@ function FriendRequestToThumbnail ({to}){
     return (
         <div className="thumbnail">
             <div className="thumbnail-header">
-                <h1 style={{marginRight:"0.3em"}}>{t("friends.friend-requests.thumbnail.to.title")}<Link to={friendLink} className={dark ? "drkmd underline" : "strhov underline"}>{userInfo != [] ? userInfo.name : "...."}</Link></h1>
-                <button className="header-btn signup-btn">{t("friends.friend-requests.thumbnail.to.cancel")}</button>
+                <h1 style={{marginRight:"0.3em"}}>{t("profile.friend-requests.thumbnail.to.title")}<Link to={friendLink} className={dark ? "drkmd underline" : "strhov underline"}>{userInfo != [] ? userInfo.name : "...."}</Link></h1>
+                <button className="header-btn signup-btn">{t("profile.friend-requests.thumbnail.to.cancel")}</button>
             </div>
         </div>
     );

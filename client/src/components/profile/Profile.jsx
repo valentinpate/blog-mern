@@ -5,6 +5,7 @@ import axios from 'axios';
 import '../../App.css';
 import '../css/clear.css'
 import '../css/dark.css'
+import '../css/responsive.css'
 import Header from '../parts/Header';
 import PostThumbnail_onProfile from '../parts/PostThumbnail_onProfile';
 import { DarkMode } from '../../context/DarkMode';
@@ -68,11 +69,6 @@ function Profile() {
       setDark(false)
     }
   },[dark])
-
-  const toggleLanguage = (lang) =>{
-    setLanguage(lang)
-    i18n.changeLanguage(lang)
-  }
 
   return (
     <div className="bg-4 font prof">

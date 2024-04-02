@@ -9,15 +9,17 @@ import { User } from '../../context/User';
 import { DarkMode } from '../../context/DarkMode';
 import Header from '../../components/parts/Header';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Request (){
-    const {user} = useContext(User)
+    const {user, language, setLanguage} = useContext(User)
     const {dark} = useContext(DarkMode)
     const {userId} = useParams()
     const navigate = useNavigate()
     const [request, setRequest] = useState([])
-    const [ok, setOk] = useState("Aceptar solicitud") //esto con i18Next quedaría useState(t("...aceptar-solicitud...")), se setea setOk(t("...solicitud-aceptada..."))
+    const [ok, setOk] = useState(t("profile.friend-requests.thumbnail.from.accept"))
     const [error, setError] = useState("")
+    const { t } = useTranslation("global")
 
     useEffect(()=>{
         async function getRequest(){
@@ -37,7 +39,7 @@ function Request (){
             console.log('come front acceptRequest', user)
             console.log('come front',userId)
             if (response.data.success) {
-                setOk("Solicitud aceptada");
+                setOk(t("profile.friend-requests.thumbnail.from.ok"));
                 setTimeout(()=>{navigate("/mod/requests")}, 1000)
             } else {
                 setError("ERROR: Error al aceptar la solicitud, inténtelo de nuevo más tarde.");
@@ -65,21 +67,20 @@ function Request (){
                 <>
                 <section className={dark ? "post dark-bg" : "post clear-bg"}>
                     <div className="post-header">
-                        <h1>Solicitud de: {request.mail}</h1>
+                        <h1>{t("mod.request.thumbnail-title")}{request.mail}</h1>
                     </div>
                     <p className="post-body">{request.body}</p>
                     <div className="add-post-form-button">
                         <button className="add-btn signin-btn" onClick={acceptRequest}>{ok}</button>
-                        <button className="add-btn signup-btn" onClick={rejectRequest}>Rechazar solicitud</button>
+                        <button className="add-btn signup-btn" onClick={rejectRequest}>{t("profile.friend-requests.thumbnail.from.reject")}</button>
                     </div>
                     {/* <div className="post-buttons"></div> */}
                 </section>
                 <section className={dark ? "post dark-bg" : "post clear-bg"}>
-                    <h3>IMPORTANTE: </h3>
+                    <h3>{t("mod.request.important")}</h3>
                     <p style={{fontWeight:"bold"}}>
-                    Aceptar la solicitud significa darle el rol de mod/administrador a un usuario que no lo es. 
-                    Antes de tomar una decisión, verifica el cuerpo de esta solicitud y los siguientes datos del usuario: PERFIL, ENTRADAS, COMENTARIOS y AMIGOS. <br /> 
-                    Si aceptas la solicitud y el mod elegido termina dañando a la página o a terceros relacionados, será TU responsabilidad.</p>
+                    {t("mod.request.p-1")} <br /> 
+                    {t("mod.request.p-2")}</p>
                     <p style={{fontWeight:"bold", color:"red"}}>{error}</p>
                 </section>
                 </>

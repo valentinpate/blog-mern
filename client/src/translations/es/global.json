@@ -14,18 +14,18 @@
     "signin": {
         "signin-title": "Bienvenido",
         "signin-button": "Iniciar sesión",
+        "ph-user-email": "Nombre de usuario o e-mail",
         "signin-text": "¿No tienes una cuenta?",
-        "signin-text2": "Regístrate aqui"
+        "signin-text2": "Regístrate aquí"
     },
     "signup":{
         "title":"Escribe sin problemas",
-        "subtitle":"blog-mern",
         "ph-name":"Nombre de usuario",
         "ph-email":"Email",
         "ph-password":"Contraseña",
         "button":"Crear cuenta",
         "message1":"¿Ya tienes una cuenta?",
-        "message2": "Inicia sesion aqui"
+        "message2": "Inicia sesión aquí"
     },
     "dashboard":{
         "header":"Muro",
@@ -36,15 +36,15 @@
         "label":"Editar nombre",
         "dark-mode":"Habilitar modo oscuro",
         "clear-mode":"Habilitar modo claro",
-        "messageMod":"En blog mern puedes convertirte en moderador de la pagina",
+        "messageMod":"En blog mernm puedes convertirte en moderador de la página,",
         "messageMod2":"Solicitar ser mod",
         "messageMod3":"Solicitar baja de mod",
         "button1":"Habilitar modo oscuro",
-        "button2":"Cambiar idioma a ingles",
+        "button2":"Cambiar idioma a inglés",
         "friendTitle":"Mis amigos",
         "friendButton":"Ver mi lista de amigos",
         "postTitle":"Mis entradas",
-        "postMessage":"En este momento no tienes ninguna entrada",
+        "postMessage":"En este momento no tienes ninguna entrada.",
         "friend-requests":{
             "header":"Solicitudes de amistad",
             "received":"Solicitudes recibidas: ",
@@ -68,6 +68,7 @@
         "subtitle":"Todavía no hay comentarios. ¡Sé el primero en dejar un mensaje!",
         "button":"Enviar comentario",
         "message":"cargando",
+        "thumbnail-visit":"visita",
         "thumbnail-visits":"visitas",
         "thumbnail-comment":"comentario",
         "thumbnail-comments":"comentarios",

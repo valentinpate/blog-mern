@@ -9,19 +9,25 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next"
 
 function Header() {
-  const {user, setUser, LogOut} = useContext(User)
+  const {user, setUser, language, setLanguage, LogOut} = useContext(User)
   const {dark} = useContext(DarkMode)
   const navigate = useNavigate()
   const token = localStorage.getItem("token")
   const { t , i18n } = useTranslation("global")
-  const [ language, setLanguage] = useState("es")
-
 
   const toggleLanguage = (lang) =>{
     setLanguage(lang)
+    localStorage.setItem("language", JSON.stringify(lang))
     i18n.changeLanguage(lang)
   }
 
+  useEffect(()=>{
+    const lang = localStorage.getItem("language")
+    if(lang){
+      setLanguage(JSON.parse(lang))
+      i18n.changeLanguage(JSON.parse(lang))
+    }
+  },[language])
 
   // const LogOut = async () => {
   //   localStorage.removeItem("token")
@@ -69,23 +75,33 @@ function Header() {
     <header className={dark ? "dark-header" : "clear-header"}>
         <h1>blog mern.</h1>
         {user ? 
-          <div className="header-btns">
-              <a href="/profile"><button className="header-btn signin-btn">{user.name}</button></a>
-              <a href="/dashboard"><button className={window.location.href=="http://localhost:3000/dashboard" ? "header-btn signup-btn" : "header-btn signin-btn"} 
-                disabled={window.location.href=="http://localhost:3000/dashboard" ? "disabled" : ""}>
-                {window.location.href=="http://localhost:3000/dashboard" ? t("header.on-dashboard") : t("header.go-dashboard")}</button>
-              </a>
-              <a href="/"><button className="header-btn signup-btn" onClick={LogOut}>{t("header.header-exit")}</button></a>
-              {language === "es" ? <button className='header-btn signup-btn' onClick={() => toggleLanguage('en')}><img src="/es.png" width="20px" alt="" title="ES"></img></button> :
-              <button className='header-btn signup-btn' onClick={() => toggleLanguage('es')}><img src="/en.png" width="20px" alt="" title="EN"></img></button>}
-          </div> 
+          <>
+            <div className="header-btns">
+                <a href="/profile"><button className="header-btn signin-btn">{user.name}</button></a>
+                <a href="/dashboard"><button className={window.location.href=="http://localhost:3000/dashboard" ? "header-btn signup-btn" : "header-btn signin-btn"} 
+                  disabled={window.location.href=="http://localhost:3000/dashboard" ? "disabled" : ""}>
+                  {window.location.href=="http://localhost:3000/dashboard" ? t("header.on-dashboard") : t("header.go-dashboard")}</button>
+                </a>
+                <a href="/"><button className="header-btn signup-btn" onClick={LogOut}>{t("header.header-exit")}</button></a>
+                {language === "es" ? <button className='header-btn signup-btn' onClick={() => toggleLanguage('en')}><img src="/es.png" width="20px" alt="" title="ES"></img></button> :
+                <button className='header-btn signup-btn' onClick={() => toggleLanguage('es')}><img src="/en.png" width="20px" alt="" title="EN"></img></button>}
+            </div>
+            <div className="burger">
+
+            </div>
+          </>
         : 
-          <div className="header-btns">
-              <a href="/signin"><button className="header-btn signin-btn">{t("header.header-login")}</button></a>
-              <a href="/signup"><button className="header-btn signup-btn">{t("header.header-signup")}</button></a>
-              {language === "es" ? <button className='header-btn signup-btn' onClick={() => toggleLanguage('en')}><img src="/es.png" width="20px" alt="" title="ES"></img></button> :
-              <button className='header-btn signup-btn' onClick={() => toggleLanguage('es')}><img src="/en.png" width="20px" alt="" title="EN"></img></button>}
-          </div>
+          <>
+            <div className="header-btns">
+                <a href="/signin"><button className="header-btn signin-btn">{t("header.header-login")}</button></a>
+                <a href="/signup"><button className="header-btn signup-btn">{t("header.header-signup")}</button></a>
+                {language === "es" ? <button className='header-btn signup-btn' onClick={() => toggleLanguage('en')}><img src="/es.png" width="20px" alt="" title="ES"></img></button> :
+                <button className='header-btn signup-btn' onClick={() => toggleLanguage('es')}><img src="/en.png" width="20px" alt="" title="EN"></img></button>}
+            </div>
+            <div className="burger">
+              
+            </div>
+          </>
         }
         {/* {language === 'es' && (
         <button className='header-btn signin-btn' onClick={() => toggleLanguage('en')}>EN</button>

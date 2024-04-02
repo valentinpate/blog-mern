@@ -4,6 +4,7 @@ import { useContext, useState } from 'react';
 import '../../App.css';
 import '../css/clear.css'
 import '../css/dark.css'
+import '../css/responsive.css'
 import { Link } from 'react-router-dom';
 import { User } from '../../context/User';
 import { DarkMode } from '../../context/DarkMode';

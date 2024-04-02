@@ -1,10 +1,12 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import axios from "axios"
 import '../../App.css';
 import '../css/clear.css'
 import '../css/dark.css'
+import '../css/responsive.css'
 import { Link, useNavigate } from 'react-router-dom';
 import { DarkMode } from '../../context/DarkMode';
+import { User } from '../../context/User';
 import { useTranslation } from "react-i18next"
 
 
@@ -12,9 +14,18 @@ function SignIn() {
   const [nombreOMail, setNombreOMail] = useState("")
   const [password, setPassword] = useState("")
   const {dark} = useContext(DarkMode)
+  const {language, setLanguage} = useContext(User)
   const navigate = useNavigate()
   const token = localStorage.getItem("token")
-  const { t } = useTranslation("global")
+  const { t, i18n } = useTranslation("global")
+
+  useEffect(()=>{
+    const lang = localStorage.getItem("language")
+    if(lang){
+      setLanguage(JSON.parse(lang))
+      i18n.changeLanguage(JSON.parse(lang))
+    }
+  },[language])
 
 
   const send = async (e) => {
@@ -29,8 +40,8 @@ function SignIn() {
             <h1>{t("signin.signin-title")}</h1>
             <form onSubmit={send} className={dark ? "sign-form dark-sign-form" : "sign-form clear-sign-form"}>
               <h3>blog mern.</h3>
-              <input type="text" placeholder="Nombre de usuario o e-mail" value={nombreOMail} onChange={(e)=>{setNombreOMail(e.target.value)}} maxLength="20"/>
-              <input type="password" placeholder="Contraseña" value={password} onChange={(e)=>{setPassword(e.target.value)}} />
+              <input type="text" placeholder={t("signin.ph-user-email")} value={nombreOMail} onChange={(e)=>{setNombreOMail(e.target.value)}} maxLength="20"/>
+              <input type="password" placeholder={t("signup.ph-password")} value={password} onChange={(e)=>{setPassword(e.target.value)}} />
               <button className="sign-btn signin-btn">{t("signin.signin-button")}</button>
             </form>
             <p>{t("signin.signin-text")} <Link to="/signup" className="underline">{t("signin.signin-text2")}</Link></p>

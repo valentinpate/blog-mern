@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../App.css';
 import './css/clear.css'
 import './css/dark.css'
+import './css/responsive.css'
 import { Link } from 'react-router-dom';
 import { DarkMode } from '../context/DarkMode';
 import { User } from '../context/User';
@@ -11,10 +12,10 @@ import PostThumbnail from './parts/PostThumbnail';
 import { useTranslation } from 'react-i18next';
 
 function Dashboard() {
-  const {user} = useContext(User)
+  const {user, language, setLanguage} = useContext(User)
   const [posts, setPosts] = useState([])
   const {dark, setDark} = useContext(DarkMode)
-  const { t } = useTranslation("global")
+  const { t, i18n } = useTranslation("global")
 
   useEffect(()=>{
     //console.log("el dashboard")

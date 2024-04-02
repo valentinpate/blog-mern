@@ -4,6 +4,7 @@ import { useContext, useState } from 'react';
 import '../../App.css';
 import '../css/clear.css'
 import '../css/dark.css'
+import '../css/responsive.css'
 import { Link } from 'react-router-dom';
 import { User } from '../../context/User';
 import { DarkMode } from '../../context/DarkMode';
@@ -23,8 +24,8 @@ function PostThumbnail({user_id, title, username, date, body, likes, visits, com
         </div>
         <h3 className="thumbnail-body">{body}</h3>
         <div className="thumbnail-footer">
-          <h3>{likes} likes</h3>
-          <h3>{visits} {t("post.thumbnail-visits")}</h3>
+          <h3>{likes} {likes == 1 ? "like" : "likes"}</h3>
+          <h3>{visits} {visits == 1 ? t("post.thumbnail-visit") : t("post.thumbnail-visits")}</h3>
           <h3>{comments.length} {comments.length === 1 ? t("post.thumbnail-comment") : t("post.thumbnail-comments")} </h3>
         </div>
     </div>

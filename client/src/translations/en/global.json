@@ -7,19 +7,19 @@
         "go-dashboard": "Go to dashboard"
     },
     "hero": {
-        "hero-title":"Write whatever you want for free.",
+        "hero-title":"Write whatever you want.",
         "hero-title2": "Welcome to your blog.",
         "hero-button": "Make your first entry!"
     },
     "signin": {
         "signin-title": "Welcome",
         "signin-button": "Log in",
+        "ph-user-email": "Username or e-mail",
         "signin-text": "Don't you have an account?",
         "signin-text2": "Sign up here"
     },
     "signup":{
         "title":"Write without problems",
-        "subtitle":"blog-mern",
         "ph-name":"Username",
         "ph-email":"E-mail",
         "ph-password":"Password",
@@ -36,11 +36,11 @@
         "label":"Edit name",
         "dark-mode":"Enable dark mode",
         "clear-mode":"Disable dark mode",
-        "messageMod":"In blog mern you can become a mod",
+        "messageMod":"In blog mern, you can become a mod.",
         "messageMod2":"Apply to be a mod",
-        "messageMod3":"Request deregistration of mod",
+        "messageMod3":"Request mod disablement",
         "button1":"Enable dark mode",
-        "button2":"Change language to english",
+        "button2":"Change language to Spanish",
         "friendTitle":"My friends",
         "friendButton":"See my list of friends",
         "postTitle":"My posts",
@@ -68,6 +68,7 @@
         "subtitle":"There are no comments yet, you can leave a message!",
         "button":"Send comment",
         "message":"loading",
+        "thumbnail-visit":"visit",
         "thumbnail-visits":"visits",
         "thumbnail-comment":"comment",
         "thumbnail-comments":"comments",
@@ -87,7 +88,7 @@
         }
     },
     "nopage":{
-        "title":"Oh, no! We're sorry",
+        "title":"Oh, no! We're sorry.",
         "subtitle":"The page you asked for does not exist.",
         "button":"Go to the dashboard"
     },

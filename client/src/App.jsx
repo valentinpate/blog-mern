@@ -25,6 +25,7 @@ import Request from './components/admin/Request';
 function App() {
   const [dark, setDark] = useState(false)
   const [user, setUser] = useState(null)
+  const [language, setLanguage] = useState("es")
   const [likes, setLikes] = useState(0)
   const [visits, setVisits] = useState(0)
 
@@ -57,7 +58,7 @@ function App() {
   }
 
   return (
-    <User.Provider value={{user, setUser, LogOut}}>
+    <User.Provider value={{user, setUser, language, setLanguage, LogOut}}>
       <DarkMode.Provider value={{dark, setDark, set}}>
         <PostData.Provider value={{likes,setLikes,visits,setVisits}}>
           <BrowserRouter>

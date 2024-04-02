@@ -9,12 +9,14 @@ import { DarkMode } from '../../context/DarkMode';
 import Header from '../../components/parts/Header';
 import RequestThumbnail from './admin-parts/RequestThumbnail';
 import { Link, useNavigate, useParams} from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Requests (){
-    const {user} = useContext(User)
+    const {user, language, setLanguage} = useContext(User)
     const {dark} = useContext(DarkMode)
     const {userId} = useParams()
     const [requests, setRequests] = useState([])
+    const { t } = useTranslation("global")
 
     useEffect(()=>{
         async function getRequests(){
@@ -40,13 +42,13 @@ function Requests (){
         <Header/>
         <section className={dark ? "font userboard dark-dashboard" : "font userboard clear-dashboard"}>
             <div className="dashboard-header">
-              <h1>Lista de usuarios</h1>
-              <Link to="/mod/users"><button className="header-btn signup-btn">Administrar</button></Link>
+              <h1>{t("mod.user-moderation.header")}</h1>
+              <Link to="/mod/users"><button className="header-btn signup-btn">{t("mod.user-moderation.admin")}</button></Link>
             </div>
         </section>
         <section className={dark ? "font dashboard dark-dashboard" : "font dashboard clear-dashboard"}>
             <div className="dashboard-header">
-              <h1>Solicitudes</h1>
+              <h1>{t("mod.requests-list.header")}</h1>
             </div>
             <div className="posts">
                 {requests.length > 0 ?  
@@ -55,7 +57,7 @@ function Requests (){
                         return <Link to={requestLink}><RequestThumbnail mail={r.mail} /></Link>
                     })
                 : 
-                    <h1 style={{fontSize:"2rem",marginTop:"1em", marginLeft:"1.3em"}}>En este momento no hay ninguna solicitud.</h1>
+                    <h1 style={{fontSize:"2rem",marginTop:"1em", marginLeft:"1.3em"}}>{t("mod.requests-list.no-requests")}</h1>
                 }
             </div>
         </section>
