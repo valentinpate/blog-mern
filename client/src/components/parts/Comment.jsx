@@ -92,7 +92,7 @@ function Comment({id, user_id, username, comment, date, time, likes}) {
           <h1>{username}</h1>
           <button className="like not-liked close" onClick={exit}><i class="bi bi-x-lg"></i></button>
         </div>
-        <form action="" className="comment-form" onSubmit={editComment}>
+        <form action="" className="comment-form edit-form" onSubmit={editComment}>
           <textarea name="" id="" cols="30" rows="10" className="add-textarea comment-textarea" 
           style={{marginTop:"1em",marginLeft:"1em", width:"97%"}} value={editedComment} onChange={(e)=>{setEditedComment(e.target.value)}}
           placeholder={comment}></textarea>

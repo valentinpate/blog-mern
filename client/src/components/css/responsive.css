@@ -11,6 +11,12 @@
 }
 
 @media (max-width:768px){
+    .add-post-form-button button{
+        font-size:1.8rem;
+    }
+    .post-header h1:last-child{
+        text-align:right;
+    }
     .sign-form{
         width:100%;
     }    
@@ -29,6 +35,12 @@
     .profile-header img{
         width:3em;
     }
+    .thumbnail-header h1{
+        font-size:1.2rem;
+    }
+    .edit-form textarea{
+        width:90% !important;
+    }
     .hero{
         margin-top:15%;
     }
@@ -37,6 +49,12 @@
     }
     .save-profile-name{
         right:15%;
+    }
+    .post{
+        width:83%;
+    }
+    .add-code{
+        width:85%;
     }
 }
 
@@ -69,6 +87,26 @@
     }
     .profile-name input{
         width:50%;
+    }
+    .add-post-form-button button{
+        margin:0.3em 0;
+        font-size:1.5rem;
+    }
+    .comment-form button{
+        font-size:1.3rem;
+    }
+    .edit-form textarea{
+        width:85% !important;
+    }
+    .post-header h1{
+        font-size:1rem;
+    }
+    .post-header h1 span, .post-buttons h3, .post-body{
+        font-size:1.1rem;
+    }
+    .dlt h3{
+        margin-top:0.5em;
+        text-align:center;
     }
     .hero{
         margin-top:20%;
@@ -110,5 +148,24 @@
     }
     .profile-posts{
         padding:1em 0;
+    }
+    .request-title{
+        font-size:2rem;
+    }
+    .add-post-form-button{
+        flex-direction:column;
+        align-items:center;
+    }
+    .add-input, .add-textarea{
+        font-size:1rem;
+    }
+    .post{
+        width:75%;
+    }
+    .post-body{
+        margin:1.8em;
+    }
+    .add-code{
+        width:90%;
     }
 }

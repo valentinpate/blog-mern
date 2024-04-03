@@ -111,7 +111,14 @@
             "header":"Do you want to be a mod?",
             "explain":"Explain why do you want to be a mod:",
             "send":"Send mod request",
-            "cancel":"Cancel"
+            "cancel":"Cancel",
+            "text":{
+                "default":"Both fields must be completed for your request.",
+                "all-fields":"Please, fill in all of the inputs.",
+                "mail":"Please, put your user's mail: ",
+                "ok":"Your request has been sent. Thank you for contacting us.",
+                "error":"There was a mistake on your request. Please, try again later."
+            }
         },
         "code":{
             "header":"Mod code insertion",
@@ -126,7 +133,6 @@
                 "incomplete":"Please, insert the code in both input fields.",
                 "ok":"Role has been updated. Thanks for your request.",
                 "error":"Error: Inserted codes do not match. Please, type them in correctly."
-
             }
         }
     },

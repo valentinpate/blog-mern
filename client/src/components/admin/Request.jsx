@@ -13,13 +13,13 @@ import { useTranslation } from 'react-i18next';
 
 function Request (){
     const {user, language, setLanguage} = useContext(User)
+    const { t } = useTranslation("global")
     const {dark} = useContext(DarkMode)
     const {userId} = useParams()
     const navigate = useNavigate()
     const [request, setRequest] = useState([])
     const [ok, setOk] = useState(t("profile.friend-requests.thumbnail.from.accept"))
     const [error, setError] = useState("")
-    const { t } = useTranslation("global")
 
     useEffect(()=>{
         async function getRequest(){

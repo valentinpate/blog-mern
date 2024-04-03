@@ -111,7 +111,14 @@
             "header":"¿Quieres ser mod?",
             "explain":"Explica por qué quieres ser mod:",
             "send":"Enviar solicitud",
-            "cancel":"Cancelar"
+            "cancel":"Cancelar",
+            "text":{
+                "default":"Ambos campos son obligatorios para su solicitud.",
+                "all-fields":"Por favor, rellene todos los campos.",
+                "mail":"Por favor, ponga el mail de su usuario: ",
+                "ok":"Su solicitud ha sido enviada. Muchas gracias por contactarte.",
+                "error":"Hubo un error en su solicitud. Por favor, intente más tarde."
+            }
         },
         "code":{
             "header":"Inserción de código de mod",
@@ -126,7 +133,6 @@
                 "incomplete":"Por favor, ingrese el código en ambos campos.",
                 "ok":"Rol actualizado. Muchas gracias por tu solicitud.",
                 "error":"Error: Los códigos ingresados no coinciden. Por favor, escríbalos de manera adecuada."
-
             }
         }
     },
