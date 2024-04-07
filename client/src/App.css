@@ -258,7 +258,7 @@ header h1{
 }
 
 .signin-btn{
-  background-color:var(--str);
+  background-color:var(--str) !important;
   border:none;
   border-radius:0.5em;
   color:white;

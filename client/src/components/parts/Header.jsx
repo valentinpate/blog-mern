@@ -87,7 +87,19 @@ function Header() {
                 <button className='header-btn signup-btn' onClick={() => toggleLanguage('es')}><img src="/en.png" width="20px" alt="" title="EN"></img></button>}
             </div>
             <div className="burger">
-
+            <div class="dropdown">
+              <button class="signin-btn btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-list"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/profile">{user.name}</a></li>
+                <li><a class="dropdown-item" href="/dashboard"><button disabled={window.location.href=="http://localhost:3000/dashboard" ? "disabled" : ""}>
+                {window.location.href=="http://localhost:3000/dashboard" ? t("header.on-dashboard") : t("header.go-dashboard")}</button></a></li>
+                <li><a class="dropdown-item" href="/" onClick={LogOut}>{t("header.header-exit")}</a></li>
+                {language === "es" ? <li><button class="dropdown-item" onClick={() => toggleLanguage('en')}>Cambiar idioma a inglés</button></li> :
+                  <li><button class="dropdown-item" onClick={() => toggleLanguage('es')}>Change language to spanish</button></li>}
+              </ul>
+            </div>
             </div>
           </>
         : 
@@ -99,7 +111,17 @@ function Header() {
                 <button className='header-btn signup-btn' onClick={() => toggleLanguage('es')}><img src="/en.png" width="20px" alt="" title="EN"></img></button>}
             </div>
             <div className="burger">
-              
+              <div class="dropdown">
+                <button class="signin-btn btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-list"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/signin">{t("header.header-login")}</a></li>
+                  <li><a class="dropdown-item" href="/signup">{t("header.header-signup")}</a></li>
+                  {language === "es" ? <li><button class="dropdown-item" onClick={() => toggleLanguage('en')}>Cambiar idioma a inglés</button></li> :
+                  <li><button class="dropdown-item" onClick={() => toggleLanguage('es')}>Change language to spanish</button></li>}
+                </ul>
+              </div>
             </div>
           </>
         }

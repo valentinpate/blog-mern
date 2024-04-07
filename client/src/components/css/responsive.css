@@ -22,6 +22,15 @@
     }    
 }
 
+@media(max-width:584px){
+    .header-btns{
+        display:none;
+    }
+    .burger{
+        display:block;
+    }
+}
+
 @media (min-width:401px) and (max-width:768px){
     .hero h1{
         font-size:5.4rem;

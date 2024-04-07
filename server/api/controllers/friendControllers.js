@@ -103,6 +103,24 @@ const accept_request_friend = async (req,res) =>{
     }
 }
 
+const reject_request_friend = async (req,res) => {
+    const {requestId} = req.body
+    try{
+        const request = await RequestFriend.findById(requestId)
+        if(!request){
+            return res.status(404).json({message:"Request not found"})
+        }else{
+            return res.status(200).json({message:"Request rejected"})
+        }
+    }catch(err){
+        console.log("Error", err)
+    }
+}
+
+const cancel_request_friend = async (req,res) => { //lo mismo que reject?
+
+}
+
 const get_my_friends = async (req,res) => {
     const userId = req.params.userId
     console.log("come from FRONT, i am user who wants my friends list",userId)
@@ -146,18 +164,19 @@ const get_my_friends = async (req,res) => {
 //     }
 // }
 
-const pull_friend = async(req,res)=>{
+const pull_friend_from_list = async(req,res)=>{ //pull en array friends de usuario. Necesito userId
 
 }
 
 module.exports = {
     get_friend_info,
     get_friend_posts,
-    pull_friend,
+    pull_friend_from_list,
     get_requests_friend,
     get_sent_requests,
     get_received_requests,
+    get_my_friends,
     create_request_friend,
     accept_request_friend,
-    get_my_friends
+    reject_request_friend
 }
