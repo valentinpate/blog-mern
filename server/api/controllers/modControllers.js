@@ -7,11 +7,22 @@ const sendEmail = require('../../config/nodemailer')
 // USER MODERATION
 
 const get_all_users = async(req, res)=>{
-    
+    const users = await Usuario.find({})
+    res.json(users)
 }
 
-const ban_profile = async(req, res)=>{
-
+const ban_profile = async(req, res)=>{ //post
+    const {userId} = req.params
+    try{
+        const user = await Usuario.findByIdAndDelete(userId)
+        if(!user){
+            res.status(404).json({state:"User not found"})
+        }else{
+            res.status(200).json({state:"User banned", banned:user})
+        }
+    }catch(err){
+        res.json("Error", err)
+    }
 }
 
 // REQUESTS
@@ -86,6 +97,8 @@ const rejectRequest = async(req,res)=>{
 }
 
 module.exports = {
+    get_all_users,
+    ban_profile,
     get_requests,
     get_request,
     sent_request, 

@@ -10,14 +10,18 @@ import PostThumbnail_onProfile from '../parts/PostThumbnail_onProfile';
 import { DarkMode } from '../../context/DarkMode';
 import { User } from '../../context/User';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useTranslation } from "react-i18next"
 
 function Friend() {
   const {user} = useContext(User)
   const {dark, setDark} = useContext(DarkMode)
   const {userId} = useParams()
-  const [thisUser, setUser] = useState([])
+  const { t } = useTranslation("global")
+  const [thisUser, setThisUser] = useState([])
   const [userPosts, setUserPosts] = useState([])
-  const [sent, setSent] = useState("Enviar solicitud de amistad")
+  const [sent, setSent] = useState(t("profile.friend.request.send"))
+  const [dlt, setDlt] = useState(t("profile.friend.request.delete"))
+  const [friended, setFriended] = useState(false)
   const navigate = useNavigate()
 
   useEffect(()=>{
@@ -25,7 +29,7 @@ function Friend() {
     async function getUser(){
         const petition = await axios.get(`http://localhost:3001/u/${userId}/get`)
         if(petition.data != null || "no hay usuario"){
-            setUser(petition.data)
+            setThisUser(petition.data)
         }
     }
     async function getPosts(){
@@ -39,6 +43,29 @@ function Friend() {
   },[user])
 
   useEffect(()=>{
+    if(thisUser){
+      console.log(user._id, thisUser._id)
+      async function findRequest(){
+        const petition = await axios.post("http://localhost:3001/u/find", {fromId: user._id, toId: thisUser._id}, {withCredentials:true})
+        if(petition.data.state === "Found"){
+          setSent(t("profile.friend.request.sent"))
+        }
+      }
+      findRequest()
+    }
+  },[user, thisUser])
+
+  useEffect(()=>{
+    if(thisUser){
+      const index = user.friends.findIndex(f => f._id === thisUser._id)
+      console.log(index, thisUser, user)
+      if(index != -1){
+        setFriended(true)
+      }
+    }
+  },[user, thisUser])
+
+  useEffect(()=>{
     const darkSt = localStorage.getItem("dark")
     if(darkSt === "true"){
       setDark(true)
@@ -49,8 +76,8 @@ function Friend() {
 
   const sentRequestFriend = async () => { 
       try{
-        const response = await axios.post(`http://localhost:3001/u/${userId}/sent-request-friend`, {userFront : user._id, request : "Solicitud de amistad enviada" })
-        setSent("Solicitud enviada")
+        const response = await axios.post(`http://localhost:3001/u/${userId}/sent-request-friend`, {userFront : user._id, request : "Solicitud de amistad enviada" }, {withCredentials:true})
+        setSent(t("profile.friend.request.sent"))
         console.log(' i am RESPONSE', response.data)
         setTimeout(()=>{navigate("/profile")}, 1000)
       } catch (e){
@@ -58,8 +85,21 @@ function Friend() {
       }
   }
 
-  const noFriend = () => {
-
+  const noFriend = async() => {
+    try{
+      const petition = await axios.post(`http://localhost:3001/u/pull-friend`, {userId: user._id, friendId: thisUser._id}, {withCredentials:true})
+      if(petition.data.state === "Friend deleted"){
+        const newUser = petition.data.newUser
+        console.log(petition)
+        setDlt(t("profile.friend.request.deleted"))
+        localStorage.setItem("user", JSON.stringify(newUser))
+        setTimeout(()=>{navigate("/profile")},1500)
+      }else{
+        console.log(petition)
+      }
+    }catch(err){
+      console.log(err)
+    }
   }
 
  /*userPosts.map((p)=>{
@@ -87,13 +127,14 @@ function Friend() {
               <div className="profile-align">
                 <div className="user-mail">
                   <h2>Mail: {thisUser != [] ? thisUser.email : "///////"}</h2>
-                  <button onClick={sentRequestFriend} className="friend-btn signin-btn">{sent}</button>
+                  {friended ? <button onClick={noFriend} className="friend-btn signup-btn">{dlt}</button> : 
+                  <button onClick={()=>{if(sent != t("profile.friend.request.sent")){sentRequestFriend()}}} className="friend-btn signin-btn">{sent}</button>}
                 </div>
               </div>
             </div>
         </section>
         <div className={dark ? "profile-posts dark-profile-posts" : "profile-posts clear-profile-posts"}>
-          <h2 style={{textDecoration:"underline"}}>Entradas de {thisUser != [] ? thisUser.name : "//////"}</h2>
+          <h2 style={{textDecoration:"underline"}}>{t("profile.friend.entries")}{thisUser != [] ? thisUser.name : "//////"}</h2>
           {userPosts.length > 0 
             ? 
             userPosts.map((p)=>{
@@ -108,7 +149,7 @@ function Friend() {
                     comments={p.comments} /> 
               </Link>)})
             : 
-            <h2>En este momento {thisUser != [] ? thisUser.name : "//////"} no tiene ninguna entrada publicada.</h2>}
+            <h2>{t("profile.friend.no-posts.1")}{thisUser != [] ? thisUser.name : "//////"}{t("profile.friend.no-posts.2")}</h2>}
         </div>
     </div>
   );

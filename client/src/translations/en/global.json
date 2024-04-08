@@ -61,6 +61,17 @@
                     "cancel":"Cancel request"
                 }
             }
+        },
+        "friend":{
+            "entries":"Entries from ",
+            "no-posts-1":"At this moment ",
+            "no-posts-2":" has no entries.",
+            "request":{
+                "send":"Send friend request",
+                "sent":"Sent friend request",
+                "delete":"Delete friend",
+                "deleted":"Friend deleted"
+            }
         }
     },
     "post":{
@@ -97,14 +108,7 @@
         "subtitle":"Friend requests",
         "button":"Look",
         "myFriends":"My friends",
-        "titleNoFriends":"You still don't have any friends",
-        "friend-profile":{
-            "entries":"Entries of ",
-            "no-posts-1":"At this moment ",
-            "no-posts-2":" has no entries.",
-            "send":"Send request",
-            "sent":"Sent request"
-        }
+        "titleNoFriends":"You still don't have any friends."
     },
     "mod-request":{
         "request":{

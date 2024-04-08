@@ -220,6 +220,10 @@ header h1{
   color: var(--drkmd);
 }
 
+.pointer-events{
+  pointer-events:none;
+}
+
 .burger{
   display:none;
 }

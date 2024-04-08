@@ -61,6 +61,20 @@ const get_friend_posts = async(req,res)=>{
     }
 }
 
+const find_request = async(req,res) => {
+    const {fromId, toId} = req.body
+    try{
+        const request = await RequestFriend.findOne({fromUser:fromId, toUser:toId})
+        if(request){
+            res.status(200).json({state:"Found",request:request})
+        }else{
+            res.json({state:"Not found"})
+        }
+    }catch(err){
+        console.log(err)
+    }
+}
+
 const create_request_friend = async (req,res) =>{
     const { userId } = req.params
     const { request,userFront } = req.body
@@ -94,31 +108,33 @@ const accept_request_friend = async (req,res) =>{
         }
         user.skipPreSave = true
         const friend = await Usuario.findById(request.fromUser)
-        user.friends.push(friend)
+        const friendObject = {
+            _id: friend._id,
+            name: friend.name,
+            image: friend.image
+        }
+        user.friends.push(friendObject)
         await user.save()
-        await RequestFriend.findOneAndDelete({id:request._id})
-        return res.status(200).json({ message: "friend request accept successfully"})
+        await RequestFriend.findOneAndDelete({_id:requestId})
+        return res.status(200).json({ message: "friend request accept successfully", newUser:user})
     } catch(e){
         console.log("error when accepting request",e)
     }
 }
 
-const reject_request_friend = async (req,res) => {
-    const {requestId} = req.body
+const delete_request_friend = async (req,res) => {
+    const requestId = req.params.requestId
     try{
-        const request = await RequestFriend.findById(requestId)
+        const request = await RequestFriend.findByIdAndDelete(requestId)
         if(!request){
             return res.status(404).json({message:"Request not found"})
         }else{
-            return res.status(200).json({message:"Request rejected"})
+            return res.status(200).json({message:"Request deleted"})
         }
     }catch(err){
         console.log("Error", err)
+        res.json(err)
     }
-}
-
-const cancel_request_friend = async (req,res) => { //lo mismo que reject?
-
 }
 
 const get_my_friends = async (req,res) => {
@@ -165,7 +181,20 @@ const get_my_friends = async (req,res) => {
 // }
 
 const pull_friend_from_list = async(req,res)=>{ //pull en array friends de usuario. Necesito userId
-
+    const {userId, friendId} = req.body
+    console.log("FriendId", friendId, typeof(friendId))
+    try{
+        const friendObjectId = new mongoose.Types.ObjectId(friendId)
+        const user = await Usuario.findByIdAndUpdate(userId, {$pull:{friends:{_id:friendObjectId}}}, {new: true})
+        if(user){
+            user.markModified("friends")
+            res.status(200).json({state:"Friend deleted", newUser:user})
+        }else{
+            res.json({state:"Error"})
+        }
+    }catch(err){
+        console.log(err)
+    }
 }
 
 module.exports = {
@@ -176,7 +205,8 @@ module.exports = {
     get_sent_requests,
     get_received_requests,
     get_my_friends,
+    find_request,
     create_request_friend,
     accept_request_friend,
-    reject_request_friend
+    delete_request_friend
 }

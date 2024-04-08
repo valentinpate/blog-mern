@@ -21,6 +21,7 @@ import ModRequest from './components/mod_request/ModRequest';
 import ModCode from './components/mod_request/ModCode';
 import Requests from './components/admin/Requests'
 import Request from './components/admin/Request';
+import UserModeration from './components/admin/UserModeration';
 
 function App() {
   const [dark, setDark] = useState(false)
@@ -76,6 +77,7 @@ function App() {
               <Route path="/mod" element={<ModRequest/>}></Route>
               <Route path="/mod/code" element={<ModCode/>}></Route>
               <Route path="/mod/requests" element={<Requests/>}></Route>
+              <Route path="/mod/users" element={<UserModeration/>}></Route>
               <Route path="/mod/request/:userId" element={<Request/>}></Route>
               <Route path="*" element={<NoPage/>}></Route>
             </Routes>

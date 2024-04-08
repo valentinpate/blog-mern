@@ -82,6 +82,7 @@ function Header() {
                   disabled={window.location.href=="http://localhost:3000/dashboard" ? "disabled" : ""}>
                   {window.location.href=="http://localhost:3000/dashboard" ? t("header.on-dashboard") : t("header.go-dashboard")}</button>
                 </a>
+                {user.role === "admin" && <a href="/mod/requests"><button className="header-btn signup-btn">Panel de mod</button></a>}
                 <a href="/"><button className="header-btn signup-btn" onClick={LogOut}>{t("header.header-exit")}</button></a>
                 {language === "es" ? <button className='header-btn signup-btn' onClick={() => toggleLanguage('en')}><img src="/es.png" width="20px" alt="" title="ES"></img></button> :
                 <button className='header-btn signup-btn' onClick={() => toggleLanguage('es')}><img src="/en.png" width="20px" alt="" title="EN"></img></button>}
@@ -118,6 +119,7 @@ function Header() {
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="/signin">{t("header.header-login")}</a></li>
                   <li><a class="dropdown-item" href="/signup">{t("header.header-signup")}</a></li>
+                  {user.role === "admin" && <li className="dropdown-item"><a href="/mod/requests">Panel de mod</a></li>}
                   {language === "es" ? <li><button class="dropdown-item" onClick={() => toggleLanguage('en')}>Cambiar idioma a inglés</button></li> :
                   <li><button class="dropdown-item" onClick={() => toggleLanguage('es')}>Change language to spanish</button></li>}
                 </ul>

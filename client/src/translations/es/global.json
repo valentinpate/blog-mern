@@ -61,6 +61,17 @@
                     "cancel":"Cancelar solicitud"
                 }
             }
+        },
+        "friend":{
+            "entries":"Entradas de ",
+            "no-posts-1":"En este momento ",
+            "no-posts-2":" no tiene ninguna entrada publicada",
+            "request":{
+                "send":"Enviar solicitud de amistad",
+                "sent":"Solicitud enviada",
+                "delete":"Eliminar amigo",
+                "deleted":"Amigo eliminado"
+            }
         }
     },
     "post":{
@@ -97,14 +108,7 @@
         "subtitle":"Solicitudes de amistad",
         "button":"Ver",
         "myFriends":"Mis amigos",
-        "titleNoFriends":"Todavía no tienes ningún amigo",
-        "friend-profile":{
-            "entries":"Entradas de ",
-            "no-posts-1":"En este momento ",
-            "no-posts-2":" no tiene ninguna entrada publicada",
-            "send":"Enviar solicitud de amistad",
-            "sent":"Solicitud enviada"
-        }
+        "titleNoFriends":"Todavía no tienes ningún amigo."
     },
     "mod-request":{
         "request":{

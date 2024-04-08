@@ -74,7 +74,7 @@ function FriendRequests() {
             <div className="profile-section">
             {sent.length > 0 ? 
               sent.map((r)=>{
-                return <FriendRequestToThumbnail to={r.toUser} />
+                return <FriendRequestToThumbnail request_id={r._id} to={r.toUser} />
               })
               : null}
             </div>
