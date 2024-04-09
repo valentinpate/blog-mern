@@ -24,7 +24,7 @@ function UserModeration (){
                 setUsers(petition.data)
             }
         }
-        //getUsers()
+        getUsers()
     },[])
 
 
@@ -51,8 +51,7 @@ function UserModeration (){
             <div className="posts">
                 {users.length > 0 ?  
                     users.map((u)=>{
-                        const userLink = `/user/${u._id}`
-                        return <Link to={userLink}><UserThumbnail id={u._id} name={u.name} img={u.img} /></Link>
+                        return <UserThumbnail id={u._id} name={u.name} img={u.image} />
                     })
                 : 
                     <h1 style={{fontSize:"2rem",marginTop:"1em", marginLeft:"1.3em"}}>{t("mod.requests-list.no-requests")}</h1>

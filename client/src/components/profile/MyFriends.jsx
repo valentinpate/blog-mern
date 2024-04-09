@@ -61,12 +61,12 @@ function MyFriends() {
             <div className="posts">
               {friends.length > 0 ? 
                 friends.map((f)=>{
-                  const friend = `/user/${f._id}`
-                  return (<Link to={friend}>
+                  return (
                       <FriendThumbnail key={f._id}
+                        id={f._id}
                         name= {f.name}
                         img= {f.image} />
-                      </Link>)})
+                      )})
                 : <h1 style={{fontSize:"2rem",marginTop:"1em", marginLeft:"1.3em"}}>{t("friends.titleNoFriends")}</h1>
               }
             </div>

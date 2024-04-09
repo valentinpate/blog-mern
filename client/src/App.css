@@ -152,6 +152,13 @@ header h1{
   margin:2em 0 1em 1.5em;
 }
 
+.ban-section label{
+  font-size:1.2rem;
+  font-weight:bold;
+  margin-top:1em;
+  margin-left:2em;
+}
+
 .underline:hover{
   text-decoration: underline;
 }
@@ -423,7 +430,7 @@ header h1{
   justify-content:space-between;
 }
 
-.post-like{
+.post-like, .comment-likes, .user-thumbnail-img{
   display:flex;
   align-items:center;
 }
@@ -475,10 +482,7 @@ header h1{
   justify-content:space-between;
 }
 
-.comment-likes{
-  display:flex;
-  align-items:center;
-}
+
 
 .dlt{
   display:flex;
@@ -581,4 +585,9 @@ header h1{
   font-size:1.2rem;
   font-weight:bold;
   margin:1.3em 0 0.2em 0;
+}
+
+.ban-section{
+  flex-direction:column;
+  width:100%;
 }

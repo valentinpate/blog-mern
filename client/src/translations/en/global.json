@@ -63,6 +63,7 @@
             }
         },
         "friend":{
+            "friend":"Already a friend",
             "entries":"Entries from ",
             "no-posts-1":"At this moment ",
             "no-posts-2":" has no entries.",
@@ -144,7 +145,13 @@
         "user-moderation":{
             "header":"List of users",
             "admin":"Manage",
-            "moderation":""
+            "moderation":{
+                "sure":"Are you sure that you want to ban this user? ",
+                "cause":"Explain why this user has to be banned here:",
+                "ban":"Ban user",
+                "please-cause":"Please, explain why.",
+                "banned":"User has been banned."
+            }
         },
         "requests-list":{
             "header":"Mod requests",
@@ -156,5 +163,8 @@
             "p-1":"If you accept this request, you will turn this normal user into a mod. Please verify the user's account and intentions before taking a decision including PROFILE, ENTRIES, COMMENTS and FRIENDS.",
             "p-2":"If this user turned into a mod ends up doing something against the page or others, it will be YOUR responsibility."
         }
+    },
+    "misc":{
+        "banned":"[BANNED]"
     }
 }

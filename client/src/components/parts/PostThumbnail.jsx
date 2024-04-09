@@ -1,6 +1,6 @@
 //página para miniaturas de post en dashboard
 
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import '../../App.css';
 import '../css/clear.css'
 import '../css/dark.css'
@@ -14,13 +14,12 @@ function PostThumbnail({user_id, title, username, date, body, likes, visits, com
   const {dark} = useContext(DarkMode)
   const {user} = useContext(User)
   const { t } = useTranslation("global")
-  const userLink = `/user/${user_id}`
 
   return (
     <div className={dark ? "thumbnail dark-thumbnail" : "thumbnail clear-thumbnail"}>
         <div className="thumbnail-header">
           <h1>{title}</h1>
-          <h1><Link to={username === user.name ? "/profile" : userLink} className={dark ? "drkmd underline" : "strhov underline"}>{username}</Link> | {date}</h1>
+          <h1><Link to={username === user.name ? "/profile" : `/user/${user_id}`} className={dark ? "drkmd underline" : "strhov underline"}>{username}</Link> | {date}</h1>
         </div>
         <h3 className="thumbnail-body">{body}</h3>
         <div className="thumbnail-footer">

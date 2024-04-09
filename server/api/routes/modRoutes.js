@@ -9,8 +9,8 @@ router.get('/:userId/get-req',modControllers.get_request)
 router.post('/request', modControllers.sent_request)
 router.post('/:userId/code-generate-send-email',modControllers.acceptRequest)
 router.post('/:userId/verify-code',modControllers.verify_code)
+router.post('/:userId/ban', modControllers.ban_profile)
 
-router.delete('/:userId/ban', modControllers.ban_profile)
 router.delete('/:userId/reject-req', modControllers.rejectRequest)
 
 

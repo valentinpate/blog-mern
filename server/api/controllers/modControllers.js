@@ -2,7 +2,19 @@ const randomString = require('randomstring')
 const mongoose = require('mongoose')
 const Usuario = require('../../models/Usuario')
 const Request = require('../../models/Request')
+const RequestFriend = require('../../models/RequestFriend')
+const Ban = require('../../models/Ban')
 const sendEmail = require('../../config/nodemailer')
+const Post = require('../../models/Post')
+
+const delete_data = async(param)=>{
+    await Request.deleteMany({userId:param})
+    await RequestFriend.deleteMany({$or:[
+        {fromUser:param},
+         {toUser:param}
+    ]})
+    await Post.deleteMany({user:param})
+}
 
 // USER MODERATION
 
@@ -13,12 +25,20 @@ const get_all_users = async(req, res)=>{
 
 const ban_profile = async(req, res)=>{ //post
     const {userId} = req.params
+    const {name, cause} = req.body
     try{
         const user = await Usuario.findByIdAndDelete(userId)
         if(!user){
             res.status(404).json({state:"User not found"})
         }else{
-            res.status(200).json({state:"User banned", banned:user})
+            const ban = new Ban({
+                userId:userId,
+                name:name,
+                cause:cause
+            })
+            const banOnDB = await ban.save()
+            delete_data(userId)
+            res.status(200).json({state:"User banned", bannedUser:user, ban:banOnDB})
         }
     }catch(err){
         res.json("Error", err)

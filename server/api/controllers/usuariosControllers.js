@@ -1,8 +1,10 @@
 const Usuario = require("../../models/Usuario")
 const Post = require("../../models/Post")
+const Ban = require("../../models/Ban")
 const bcrypt = require("bcrypt")
 const passport = require("passport")
 const jwt = require ('jsonwebtoken')
+const mongoose = require("mongoose")
 require("dotenv").config()
 
 const secretKey = process.env.SECRETKEYJWT
@@ -115,6 +117,27 @@ const auth = (req,res)=>{
     res.json({situation:isAuth})
 }
 
+const if_banned = async(req,res)=>{
+    const {id, username} = req.body
+    console.log(id, username)
+    try{
+        const bannedUser = await Ban.findOne({
+            $and:[
+            {userId:new mongoose.Types.ObjectId(id)},
+            {name:username}
+        ]
+    })
+        if(bannedUser){
+            res.json({state:"Banned", ban:bannedUser})
+        }else{
+            res.json({state:"Not Found"})
+        }
+    }catch(err){
+        console.log(err)
+        res.json({state:"Error",error:err})
+    }
+}
+
 const sign_out = (req,res)=>{
     console.log("2", req.isAuthenticated())
     user = null
@@ -186,5 +209,6 @@ module.exports = {
     find_user,
     auth,
     update_profile,
+    if_banned,
     sign_out
 }

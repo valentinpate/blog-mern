@@ -15,14 +15,25 @@ function Comment({id, user_id, username, comment, date, time, likes}) {
   const [editedComment, setEditedComment] = useState("")
   const [edit, setEdit] = useState(false)
   const [dlt, setDelete] = useState(false)
+  const [banned, setBanned] = useState(false)
   const {user} = useContext(User)
   const {userId, postId, commentId} = useParams()
-  const userLink = `/user/${user_id}`
   const { t } = useTranslation("global")
 
   useEffect(()=>{
-    console.log("lo hace!!!")
+    async function checkIfBanned(){
+      const petition = await axios.post("http://localhost:3001/if-banned", {id:user_id, username:username}, {withCredentials:true})
+      if(petition.data.state === "Banned" && petition.data.ban != null){
+        setBanned(true)
+      }else{
+        console.log(petition)
+      }
+    }
+    checkIfBanned()
+  },[])
 
+  useEffect(()=>{
+    console.log("lo hace!!!")
     async function getCommentLike(){
       const petition = await axios.get(`http://localhost:3001/p/${userId}/${postId}/${commentId}/get-c-like`)
       if(petition.data == "found"){
@@ -102,7 +113,9 @@ function Comment({id, user_id, username, comment, date, time, likes}) {
       : 
       <div className="comment">
         <div className="thumbnail-header">
-          <h1><Link to={username === user.name ? "/profile" : userLink} className="strhov underline">{username}</Link></h1>
+          {banned ? <h1>{t("misc.banned")}</h1> 
+          : 
+          <h1><Link to={username === user.name ? "/profile" : `/user/${user_id}`} className="strhov underline">{username}</Link></h1>}
           <h1>{date}, <span>{time}</span></h1>
         </div>
         <h3 className="comment-body">{comment}</h3>

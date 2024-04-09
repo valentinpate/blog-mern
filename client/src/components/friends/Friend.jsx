@@ -127,8 +127,14 @@ function Friend() {
               <div className="profile-align">
                 <div className="user-mail">
                   <h2>Mail: {thisUser != [] ? thisUser.email : "///////"}</h2>
-                  {friended ? <button onClick={noFriend} className="friend-btn signup-btn">{dlt}</button> : 
-                  <button onClick={()=>{if(sent != t("profile.friend.request.sent")){sentRequestFriend()}}} className="friend-btn signin-btn">{sent}</button>}
+                  <div>
+                    {thisUser.friends.some(f=>f._id === user._id) ? //si el usuario amigo me tiene en sus amigos a mí
+                    <button className="friend-btn signin-btn">{t("profile.friend.friend")}</button>
+                    : 
+                    <button onClick={()=>{if(sent != t("profile.friend.request.sent")){sentRequestFriend()}}} className="friend-btn signin-btn">{sent}</button>
+                    }
+                    {friended && <button onClick={noFriend} className="friend-btn signup-btn">{dlt}</button>}
+                  </div>
                 </div>
               </div>
             </div>

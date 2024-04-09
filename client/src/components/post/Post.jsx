@@ -20,7 +20,6 @@ function Post() {
     const {dark, setDark} = useContext(DarkMode)
     const {user} = useContext(User)
     const {userId, postId} = useParams()
-    let userLink = `/user/`
     const navigate = useNavigate()
     const { t } = useTranslation("global")
 
@@ -108,11 +107,6 @@ function Post() {
       .catch(err => {console.log("ACe => ", err)})
     }
 
-    const postUsername = (param)=>{
-      userLink = `/user/${param}`
-      return userLink
-    }
-
   return (
     <div className={dark ? "bg-dp" : ""}>
         <Header/>
@@ -122,7 +116,7 @@ function Post() {
               <section className={dark ? "font post dark-post" : "font post"}>
                   <div className="post-header">
                     <h1>{post[0].title}</h1>
-                    <h1><Link to={post != [] && post[0].username === user.name ? "/profile" : postUsername(post[0].user)} className="strhov underline">{post[0].username}</Link> | {post[0].date.slice(0,10)}, <span>{post[0].date.slice(11,16)}</span></h1>
+                    <h1><Link to={post != [] && post[0].username === user.name ? "/profile" : `/user/${post[0].user}`} className="strhov underline">{post[0].username}</Link> | {post[0].date.slice(0,10)}, <span>{post[0].date.slice(11,16)}</span></h1>
                   </div>
                   <p className="post-body">{post[0].body}</p>
                   <div className="post-buttons">
